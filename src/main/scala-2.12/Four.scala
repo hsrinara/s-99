@@ -5,6 +5,11 @@ class Four {
       case head :: tail => _length(count + 1, tail)
     }
 
-    _length(0, xs)
+    def _lengthWithFold(xs: List[Int]): Int = {
+      xs.foldLeft(0)((b, a) => b + 1)
+    }
+
+    //    _length(0, xs)
+    _lengthWithFold(xs)
   }
 }
