@@ -9,7 +9,11 @@ class FourTest extends FlatSpec with Matchers {
   "Four " can " find length of empty list" in {
     new Four().length(Nil) should be (0)
   }
-1
+
+  "Four " can " find length of list of size 1" in {
+    new Four().length(List(3)) should be (1)
+  }
+
   "Four " can " find length of list" in {
     new Four().length(List(1, 1, 2, 3, 5, 8)) should be (6)
   }
