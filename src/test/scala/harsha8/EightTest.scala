@@ -1,3 +1,5 @@
+package harsha8
+
 import org.scalatest.{FlatSpec, Matchers}
 
 class EightTest extends FlatSpec with Matchers {

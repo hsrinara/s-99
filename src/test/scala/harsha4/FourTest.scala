@@ -1,3 +1,5 @@
+package harsha4
+
 import org.scalatest.{FlatSpec, Matchers}
 
 class FourTest extends FlatSpec with Matchers {

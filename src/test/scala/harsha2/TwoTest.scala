@@ -1,3 +1,5 @@
+package harsha2
+
 import org.scalatest.{FlatSpec, Matchers}
 
 class TwoTest extends FlatSpec with Matchers {

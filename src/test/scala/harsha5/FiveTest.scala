@@ -1,4 +1,6 @@
-import org.scalatest.{FlatSpec, FunSuite, Matchers}
+package harsha5
+
+import org.scalatest.{FlatSpec, Matchers}
 
 class FiveTest extends FlatSpec with Matchers {
   "Five " can " reverse an empty list " in {

@@ -1,3 +1,5 @@
+package harsha1
+
 class One {
   def last(xs: List[Int]): Int = {
     def _last(xs: List[Int], last: Int): Int = {
@@ -7,6 +9,4 @@ class One {
     if (xs == null) throw new IllegalArgumentException("cannot last null")
     else _last(xs, xs.head)
   }
-
-
 }

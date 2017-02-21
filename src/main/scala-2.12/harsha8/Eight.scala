@@ -1,3 +1,5 @@
+package harsha8
+
 class Eight {
   def removeDuplicates(xs: List[Symbol]): List[Symbol] = {
     def _notMatchedState(remaining: List[Symbol], resultSoFar: List[Symbol]): List[Symbol] = {
