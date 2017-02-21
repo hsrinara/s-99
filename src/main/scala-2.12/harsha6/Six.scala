@@ -6,6 +6,7 @@ class Six {
   def isPalindrome(xs: List[Int]): Boolean = {
     @tailrec def _isPalindrome(remaining: List[Int]): Boolean = {
       remaining match {
+        case Nil => false
         case last :: Nil => true
         case head :: middle :: last :: Nil => head == last
         case head :: tail =>
