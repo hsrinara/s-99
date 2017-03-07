@@ -6,17 +6,17 @@ class Nine {
 
   type ListOfLists[A] = List[List[A]]
 
-  def packConsecutiveDuplicates(xs: List[Symbol]): ListOfLists[Symbol] = {
-    type ConsecutiveFilter = Symbol => Boolean
+  def packConsecutiveDuplicates[A](xs: List[A]): ListOfLists[A] = {
+    type ConsecutiveFilter = A => Boolean
 
-    def splitWhile(toEat: List[Symbol], filter: ConsecutiveFilter): (List[Symbol], List[Symbol]) = {
+    def splitWhile(toEat: List[A], filter: ConsecutiveFilter): (List[A], List[A]) = {
       val consecutiveUntil = toEat.indexWhere(s => !filter(s))
       if (consecutiveUntil == -1) (Nil, toEat)
       else toEat.splitAt(consecutiveUntil).swap
     }
 
     @tailrec
-    def _packConsecutive(working: List[Symbol], result: ListOfLists[Symbol]): ListOfLists[Symbol] = {
+    def _packConsecutive(working: List[A], result: ListOfLists[A]): ListOfLists[A] = {
       if (working.isEmpty) result
       else {
         val (remaining, packed) = splitWhile(working, _ == working.head)
