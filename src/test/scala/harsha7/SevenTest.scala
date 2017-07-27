@@ -1,8 +1,8 @@
 package harsha7
 
-import org.scalatest.{FlatSpec, Matchers}
+import dsl.BaseTest
 
-class SevenTest extends FlatSpec with Matchers {
+class SevenTest extends BaseTest {
   "Seven " can " flatten a nested list of a combination of list and simple types" in {
     new Seven().flatten(List(List(1, 1), 2, List(3, List(5, 8)))) should be(List(1, 1, 2, 3, 5, 8))
   }

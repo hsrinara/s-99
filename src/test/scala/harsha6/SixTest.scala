@@ -1,8 +1,8 @@
 package harsha6
 
-import org.scalatest.{FlatSpec, Matchers}
+import dsl.BaseTest
 
-class SixTest extends FlatSpec with Matchers {
+class SixTest extends BaseTest {
   "Six " can " find out whether list is palindrome" in {
     new Six().isPalindrome(List(1, 2, 3, 2, 1)) should be(true)
   }

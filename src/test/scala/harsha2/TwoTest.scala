@@ -1,8 +1,8 @@
 package harsha2
 
-import org.scalatest.{FlatSpec, Matchers}
+import dsl.BaseTest
 
-class TwoTest extends FlatSpec with Matchers {
+class TwoTest extends BaseTest {
   //  P02 (*) Find the last but one element of a list.
   //  Example:
   //    scala> penultimate(List(1, 1, 2, 3, 5, 8))

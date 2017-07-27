@@ -1,8 +1,8 @@
 package harsha11
 
-import org.scalatest.{FlatSpec, Matchers}
+import dsl.BaseTest
 
-class ElevenTest extends FlatSpec with Matchers {
+class ElevenTest extends BaseTest {
 
   /***
     Modified run-length encoding.

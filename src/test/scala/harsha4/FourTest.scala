@@ -1,8 +1,8 @@
 package harsha4
 
-import org.scalatest.{FlatSpec, Matchers}
+import dsl.BaseTest
 
-class FourTest extends FlatSpec with Matchers {
+class FourTest extends BaseTest {
 //  P04 (*) Find the number of elements of a list.
 //    Example:1
 //    scala> length(List(1, 1, 2, 3, 5, 8))

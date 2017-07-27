@@ -1,8 +1,8 @@
 package harsha8
 
-import org.scalatest.{FlatSpec, Matchers}
+import dsl.BaseTest
 
-class EightTest extends FlatSpec with Matchers {
+class EightTest extends BaseTest {
   "Eight " can " remove duplicates in a list" in {
     new Eight().removeDuplicates(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) should
       be(List('a, 'b, 'c, 'a, 'd, 'e))

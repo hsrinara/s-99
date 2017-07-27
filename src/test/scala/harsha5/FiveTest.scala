@@ -1,8 +1,8 @@
 package harsha5
 
-import org.scalatest.{FlatSpec, Matchers}
+import dsl.BaseTest
 
-class FiveTest extends FlatSpec with Matchers {
+class FiveTest extends BaseTest {
   "Five " can " reverse an empty list " in {
     new Five().reverse(Nil) should be(Nil)
   }

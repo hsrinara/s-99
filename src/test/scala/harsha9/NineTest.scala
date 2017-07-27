@@ -1,8 +1,8 @@
 package harsha9
 
-import org.scalatest.{FlatSpec, Matchers}
+import dsl.BaseTest
 
-class NineTest extends FlatSpec with Matchers {
+class NineTest extends BaseTest {
   "Nine " can " pack consecutive duplicates into list" in {
     new Nine().packConsecutiveDuplicates(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) should
       be(List(

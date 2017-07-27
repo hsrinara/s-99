@@ -1,8 +1,8 @@
 package harsha10
 
-import org.scalatest.{FlatSpec, Matchers}
+import dsl.BaseTest
 
-class TenTest extends FlatSpec with Matchers {
+class TenTest extends BaseTest {
   /**
     * Use the result of 9. to implement the so called
     * run length encoding data compression method.
