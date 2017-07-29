@@ -6,22 +6,24 @@ class Sixteen {
   def dropEveryN(N: Int, symbols: List[Symbol]): List[Symbol] = {
 
     @tailrec def dropEveryNRecursive(current: Int, remaining: List[Symbol], result: List[Symbol]): List[Symbol] = {
-      if (remaining.isEmpty) result
-      else {
-        val shouldBeDropped = current == N
-        dropEveryNRecursive(
-          if (shouldBeDropped) 1 else current + 1, remaining.tail,
-          if (shouldBeDropped) result else result :+ remaining.head)
+      (current, remaining) match {
+        case (_, r) if r.isEmpty => result
+        case (c, r) if c == N => dropEveryNRecursive(1, r.tail, result)
+        case (c, r) => dropEveryNRecursive(c + 1, r.tail, result :+ r.head)
       }
     }
 
-    def dropEveryNFunctional(dropEvery: Int, list: List[Symbol]): List[Symbol] = {
-      val filteredList = list.zipWithIndex filter { x => (x._2 + 1) % dropEvery != 0 }
-      filteredList map { _._1}
+    def dropEveryNFunctional(indexToDrop: Int, list: List[Symbol]): List[Symbol] = {
+      def shouldDropElement(symbolIndex: (Symbol, Int)): Boolean = (symbolIndex._2 + 1) % indexToDrop != 0
+
+      def toSymbol(symbolIndex: (Symbol, Int)): Symbol = symbolIndex._1
+
+      list.zipWithIndex.filter(shouldDropElement).map(toSymbol)
     }
 
-    val result = dropEveryNRecursive(1, symbols, Nil)
-    if (result != dropEveryNFunctional(N, symbols)) throw new RuntimeException("bug!")
-    result
+    val recursiveResult = dropEveryNRecursive(1, symbols, Nil)
+    val funResult = dropEveryNFunctional(N, symbols)
+    if (recursiveResult != funResult) throw new RuntimeException("bug!\n" + recursiveResult + "\n" + funResult)
+    recursiveResult
   }
 }
