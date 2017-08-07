@@ -1,6 +1,6 @@
 package harsha20
 
-import org.scalatest.prop.TableDrivenPropertyChecks
+import org.scalatest.prop.{TableDrivenPropertyChecks, Tables}
 import org.scalatest.{MustMatchers, WordSpec}
 
 class TwentyTest extends WordSpec with MustMatchers {
@@ -18,7 +18,7 @@ class TwentyTest extends WordSpec with MustMatchers {
   private val implementations = List(functionalRemoveAt, recursiveRemoveAt)
 
   "twenty can rotate list by N places" should {
-    val allScenarios = org.scalatest.prop.Tables.Table(
+    val allScenarios = Tables.Table(
       ("title", "implementations", "k", "input", "output"),
       ("Scenario from question", implementations, 1, List('a, 'b, 'c, 'd), (List('a, 'c, 'd), 'b)),
       ("empty list", implementations, 0, Nil, (Nil, null))
