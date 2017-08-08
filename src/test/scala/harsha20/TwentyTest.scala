@@ -3,6 +3,8 @@ package harsha20
 import org.scalatest.prop.{TableDrivenPropertyChecks, Tables}
 import org.scalatest.{MustMatchers, WordSpec}
 
+import scala.reflect.ClassTag
+
 class TwentyTest extends WordSpec with MustMatchers {
 
   /**
@@ -13,28 +15,35 @@ class TwentyTest extends WordSpec with MustMatchers {
     * scala> removeAt(1, List('a, 'b, 'c, 'd))
     * res0: (List[Symbol], Symbol) = (List('a, 'c, 'd),'b)
     */
-  private val functionalRemoveAt = new FunctionalRemoveAt()
-  private val recursiveRemoveAt = new RecursiveRemoveAt()
-  private val implementations = List(functionalRemoveAt, recursiveRemoveAt)
+  private val implementations = List(new FunctionalRemoveAt(), new RecursiveRemoveAt())
 
   "twenty can rotate list by N places" should {
     val allScenarios = Tables.Table(
       ("title", "implementations", "k", "input", "output"),
       ("Scenario from question", implementations, 1, List('a, 'b, 'c, 'd), (List('a, 'c, 'd), 'b)),
-      ("empty list", implementations, 0, Nil, (Nil, null))
+      ("Single element list", implementations, 0, List('a), (List(), 'a))
     )
 
-    TableDrivenPropertyChecks.forAll(allScenarios) { (title, implementations, k, input, output) =>
+    TableDrivenPropertyChecks.forAll(allScenarios) { (title, implementations, k, input, expectedOutput) =>
       s"$title" in {
         implementations
           .map(impl => impl.removeAt(k, input))
-          .map(y => y mustBe output)
+          .map(actual => actual mustBe expectedOutput)
       }
     }
   }
 
-  "twenty throw error when indexing beyond input" in {
-    a[IndexOutOfBoundsException] must be thrownBy functionalRemoveAt.removeAt(1, Nil)
-    a[IndexOutOfBoundsException] must be thrownBy recursiveRemoveAt.removeAt(1, Nil)
+  "throw error when indexing negatively" in {
+    verifyExceptionForAll[IndexOutOfBoundsException]("indexing negatively", implementations, (r) => r.removeAt(-1, List('a)))
+    verifyExceptionForAll[IndexOutOfBoundsException]("index empty list", implementations, (r) => r.removeAt(0, Nil))
+    verifyExceptionForAll[IndexOutOfBoundsException]("index beyond list", implementations, (r) => r.removeAt(2, List('a)))
+  }
+
+  def verifyExceptionForAll[E : ClassTag](title: String, implementations: Seq[RemoveAt], throwsException: (RemoveAt) => Unit): Unit = {
+    implementations.foreach(impl => {
+      an[E] should be thrownBy {
+        throwsException(impl)
+      }
+    })
   }
 }
