@@ -2,7 +2,7 @@ package harsha16
 
 import scala.annotation.tailrec
 
-trait DropEveryN {
+sealed trait DropEveryN {
   def dropEveryN(indexToDrop: Int, list: List[Symbol]): List[Symbol]
 }
 

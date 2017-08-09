@@ -2,7 +2,7 @@ package harsha20
 
 import scala.annotation.tailrec
 
-trait RemoveAt {
+sealed trait RemoveAt {
   def removeAt(k: Int, symbols: List[Symbol]): (List[Symbol], Symbol)
 
   def verifyIndexBounds(k: Int, symbols: List[Symbol]): Unit =
