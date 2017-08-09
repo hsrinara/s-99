@@ -33,16 +33,20 @@ class TwentyTest extends WordSpec with MustMatchers {
     }
   }
 
-  "throw error when indexing negatively" in {
+  "throw error when indexing negatively" should {
     verifyExceptionForAll[IndexOutOfBoundsException]("indexing negatively", implementations, (r) => r.removeAt(-1, List('a)))
     verifyExceptionForAll[IndexOutOfBoundsException]("index empty list", implementations, (r) => r.removeAt(0, Nil))
     verifyExceptionForAll[IndexOutOfBoundsException]("index beyond list", implementations, (r) => r.removeAt(2, List('a)))
   }
 
   def verifyExceptionForAll[E : ClassTag](title: String, implementations: Seq[RemoveAt], throwsException: (RemoveAt) => Unit): Unit = {
-    implementations.foreach(impl => {
-      an[E] should be thrownBy {
-        throwsException(impl)
+    implementations.zipWithIndex.foreach(implIndex => {
+      val implementation = implIndex._1
+      val index: Int = implIndex._2
+      s"$title - $index" in {
+        an[E] should be thrownBy {
+          throwsException(implementation)
+        }
       }
     })
   }
