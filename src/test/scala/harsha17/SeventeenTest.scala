@@ -1,8 +1,9 @@
 package harsha17
 
-import dsl.BaseTest
+import org.scalatest.prop.{TableDrivenPropertyChecks, Tables}
+import org.scalatest.{MustMatchers, WordSpec}
 
-class SeventeenTest extends BaseTest {
+class SeventeenTest extends WordSpec with MustMatchers {
 //  Split a list into two parts.
 //  The length of the first part is given. Use a Tuple for your result.
 //
@@ -11,10 +12,20 @@ class SeventeenTest extends BaseTest {
 //    scala> split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
 //  res0: (List[Symbol], List[Symbol]) = (List('a, 'b, 'c),List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
 
-  val seventeen = new Seventeen()
+  private val implementations = List(new FunctionalSplitter(), new RecursiveSplitter())
 
-  "seventeen " can " split List" in {
-    seventeen.split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should be(
-      (List('a, 'b, 'c),List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k)))
+  "seventeen can split List" should {
+    val allScenarios = Tables.Table(
+      ("title", "implementations", "N", "input", "output"),
+      ("example from question", implementations, 3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k), (List('a, 'b, 'c),List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k)))
+    )
+
+    TableDrivenPropertyChecks.forAll(allScenarios) { (title, implementation, N, input, output) => {
+      s"$title" in {
+        implementation
+          .map(impl => impl.split(N, input))
+          .map(actual => actual mustBe output)
+      }
+    }}
   }
 }
