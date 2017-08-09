@@ -1,7 +1,10 @@
 package harsha8
 
+import scala.annotation.tailrec
+
 class Eight {
   def removeDuplicates(xs: List[Symbol]): List[Symbol] = {
+    @tailrec
     def _notMatchedState(remaining: List[Symbol], resultSoFar: List[Symbol]): List[Symbol] = {
       remaining match {
         case Nil => resultSoFar
@@ -12,6 +15,7 @@ class Eight {
       }
     }
 
+    @tailrec
     def _matchedState(remaining: List[Symbol], resultSoFar: List[Symbol], matchedElem: Symbol): List[Symbol] = {
       remaining match {
         case Nil => resultSoFar

@@ -25,6 +25,7 @@ class Nine {
         else _packConsecutive(remaining, updatedResult)
       }
     }
+
     _packConsecutive(xs, Nil)
   }
 }

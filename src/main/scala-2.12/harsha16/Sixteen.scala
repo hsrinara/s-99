@@ -19,7 +19,8 @@ class FunctionalDropEveryN extends DropEveryN {
 class RecursiveDropEveryN extends DropEveryN {
   override def dropEveryN(N: Int, symbols: List[Symbol]): List[Symbol] = {
 
-    @tailrec def dropEveryNRecursive(current: Int, remaining: List[Symbol], result: List[Symbol]): List[Symbol] = {
+    @tailrec
+    def dropEveryNRecursive(current: Int, remaining: List[Symbol], result: List[Symbol]): List[Symbol] = {
       (current, remaining) match {
         case (_, r) if r.isEmpty => result
         case (c, r) if c == N => dropEveryNRecursive(1, r.tail, result)
